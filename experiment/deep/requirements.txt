@@ -1,0 +1,5 @@
+# Deep PPO reproduction - additional dependencies on top of tabular baseline
+gymnasium>=1.0
+minigrid>=3.0
+stable-baselines3>=2.0
+torch>=2.0

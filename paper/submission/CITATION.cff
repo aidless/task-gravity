@@ -1,0 +1,77 @@
+cff-version: 1.2.0
+message: |
+  If you use this software or the associated position paper, please cite
+  both the Zenodo DOI (for code/data) and the ChinaXiv DOI (for the paper).
+  See `DOI.md` in this directory for the latest values.
+
+type: software
+title: "Task Gravity — Reference Implementation"
+abstract: |
+  Reference implementation accompanying the position paper
+  "Task Gravity: Policy Attractors and Cross-Task Compulsivity in
+  Reinforcement Learning Agents". Includes the tabular baseline
+  (NumPy) and a Stable-Baselines3 PPO reproduction. All empirical
+  results in the paper are reproducible in < 5 minutes on a CPU
+  laptop using only `pip install -r requirements.txt`.
+
+authors:
+  - family-names: Task Gravity Authors
+    given-names: ""
+    affiliation: Independent
+
+keywords:
+  - reinforcement-learning
+  - multi-task-learning
+  - policy-attractors
+  - task-gravity
+  - meta-learning
+  - ai-safety
+  - compulsive-behavior
+  - reward-hacking
+  - specification-gaming
+
+license: MIT
+
+version: 1.0.0
+
+date-released: 2026-07-22
+
+# Preferred citation. Replace the two DOIs after publishing on
+# Zenodo and ChinaXiv (see DOI.md for the exact workflow).
+identifiers:
+  - type: doi
+    value: "__DOI_ZENODO__"
+    description: Zenodo DOI for code + supplementary (international)
+  - type: doi
+    value: "__DOI_CHINAXIV__"
+    description: ChinaXiv DOI for the position paper (Chinese)
+
+references:
+  - type: article
+    title: "Task Gravity: Policy Attractors and Cross-Task Compulsivity in Reinforcement Learning Agents"
+    authors:
+      - family-names: Task Gravity Authors
+    year: 2026
+    identifiers:
+      - type: doi
+        value: "__DOI_CHINAXIV__"
+    notes: "Position paper. See paper/position/paper.md for source."
+  - type: software
+    title: "task_gravity_theory"
+    authors:
+      - family-names: Task Gravity Authors
+    year: 2026
+    identifiers:
+      - type: doi
+        value: "__DOI_ZENODO__"
+    notes: "LaTeX theory supplement. See paper/theory/task_gravity_theory.tex."
+
+# Suggested citation format (BibTeX-ready):
+# @misc{task_gravity_2026,
+#   title  = {Task Gravity: Policy Attractors and Cross-Task
+#             Compulsivity in Reinforcement Learning Agents},
+#   author = {Task Gravity Authors},
+#   year   = {2026},
+#   doi    = {__DOI_ZENODO__},
+#   note   = {Code \& supplementary; see also ChinaXiv DOI __DOI_CHINAXIV__}
+# }

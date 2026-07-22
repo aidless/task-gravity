@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+
+# PPO checkpoints (large, regenerable)
+experiment/deep/checkpoints/
+*.zip
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Logs (keep, but uncomment to ignore)
+# *.log
+# logs/
+
+# Build artifacts
+build/
+dist/
+*.pdf
+!paper/**/*.pdf

@@ -1,0 +1,22 @@
+[
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.0,
+    "seed": 0,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.7,
+    "seed": 0,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  }
+]

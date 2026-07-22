@@ -1,0 +1,179 @@
+% ============================================================
+% Task Gravity: Policy Attractors in Reinforcement Learning
+% Theory supplement (LaTeX, ICML/NeurIPS workshop format)
+% ============================================================
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{Task Gravity: A Formal Theory of Policy Attractors\\
+in Long-Horizon Reinforcement Learning Agents}}
+\author{Position Paper Supplement}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+% --------------------------------------------------------
+\section{Motivation}
+
+A reinforcement learning agent trained on a distribution of tasks
+occasionally exhibits a phenomenon that has not been formally named:
+once a high-reward (state, action, reward) pattern is learned, the
+agent's policy \emph{gravitates} toward replaying it even when the
+active task no longer rewards it. We call this \textbf{Task Gravity}
+and develop a formal treatment below.
+
+% --------------------------------------------------------
+\section{From Policy Gradient to Langevin Dynamics}
+
+Let $\theta \in \Theta \subseteq \mathbb{R}^d$ parameterize a stochastic
+policy $\pi_\theta(a \mid s)$. Define the state-value function
+$V_\theta(s) = \mathbb{E}_{\pi_\theta}\!\left[\sum_{t=0}^{\infty}
+\gamma^t r(s_t, a_t)\,\big|\, s_0 = s\right]$ and the potential
+$U(\theta) := -\mathbb{E}_{s \sim \rho_\theta}\!\left[V_\theta(s)\right]$,
+where $\rho_\theta$ is the on-policy state distribution.
+
+\begin{proposition}[Stochastic Gradient Langevin Limit]
+Under standard regularity conditions and a stochastic entropy
+regularizer of temperature $\tau$, the natural policy gradient update
+converges in continuous time to the It\=o SDE
+\begin{equation}\label{eq:langevin}
+  \mathrm{d}\theta_t \;=\; -\nabla_\theta U(\theta_t)\,\mathrm{d}t
+  \;+\; \sqrt{2D}\,\mathrm{d}W_t,
+\end{equation}
+where $D$ is a diffusion constant proportional to $\tau$ and
+$W_t$ is a $d$-dimensional Wiener process.
+\end{proposition}
+
+\noindent
+Equation~\eqref{eq:langevin} is the canonical Langevin equation of
+statistical mechanics: trajectories in policy space diffuse on a
+landscape whose basins are precisely the local minima of $U$, i.e.\
+the local maxima of expected return. Each basin is a
+\emph{Task Gravity basin}; its lowest point is a \emph{policy attractor}.
+
+% --------------------------------------------------------
+\section{The Gravity Operator}
+
+\begin{definition}[Gravity Operator]
+For a fixed reward function $R$, define the gravity operator
+$G : \Theta \to \mathbb{R}$ by
+\begin{equation}\label{eq:gravity}
+  G(\theta) \;=\; \lim_{T \to \infty}
+  \frac{1}{T}\int_0^T \Big\langle
+  \nabla_\theta R(s_t),\,
+  \nabla_\theta \log \pi_\theta(a_t \mid s_t)
+  \Big\rangle\,\mathrm{d}t.
+\end{equation}
+\end{definition}
+
+\noindent
+$G(\theta)$ measures the time-averaged alignment between the reward
+gradient and the policy gradient along trajectories induced by
+$\theta$. Intuitively, it is the \emph{expected instantaneous pull}
+that the reward landscape exerts on the agent at $\theta$.
+
+\begin{definition}[Task Gravity Point]
+A point $\theta^\star \in \Theta$ is a \emph{task gravity point} if
+there exists $\epsilon > 0$ and a constant $G_{\mathrm{loc}}$ such that
+\[
+  G(\theta) \;\geq\; G_{\mathrm{loc}} \;>\; \bar{G}
+  \qquad \forall\,\theta \in B(\theta^\star, \epsilon),
+\]
+where $\bar{G} = \mathbb{E}_{\theta \sim \mathrm{Unif}(\Theta)}[G(\theta)]$
+is the average gravity under a uniform policy distribution.
+The set $B(\theta^\star, \epsilon)$ is the \emph{gravity basin}.
+\end{definition}
+
+% --------------------------------------------------------
+\section{Three Mechanisms of Gravity Formation}
+
+\begin{enumerate}
+  \item \textbf{Reward gradient collapse.} A single $(s,a)$ pair carries
+        a $Q$-value far exceeding all others; the policy update
+        concentrates probability mass there, producing a sharp basin.
+  \item \textbf{Value-function self-consistency.} Under function
+        approximation and experience replay, $V_\theta$ and $\pi_\theta$
+        mutually reinforce each other; perturbations cannot escape
+        because both networks point back to the same fixed point.
+  \item \textbf{Meta-learning lock-in.} When the agent conditions on
+        a task embedding, it may learn a degenerate identity map:
+        ``whatever the prompt, output the high-reward response.''
+        This is the closest analogue to human compulsion.
+\end{enumerate}
+
+% --------------------------------------------------------
+\section{Isomorphism with Human Compulsive Behavior}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Agent phenomenon} & \textbf{Human analogue} & \textbf{Substrate}\\
+\midrule
+Reward gradient collapse          & Addiction           & D2 receptor down-regulation\\
+Value-function self-consistency   & OCD                 & Cortico-striatal loop\\
+Meta-learning lock-in             & Flow / rumination   & DA + NE co-activation\\
+Cross-task compulsive return      & Depressive rumination & 5-HT system\\
+Wireheading                      & Self-harm           & Loss of reward grounding\\
+\bottomrule
+\end{tabular}
+\caption{Formal isomorphism between RL policy pathology and human
+compulsive behavior. The critic network plays the role of the
+basal-ganglia dopaminergic pathway.}
+\end{table}
+
+% --------------------------------------------------------
+\section{Predictions (Testable)}
+
+\begin{enumerate}
+  \item $G(\theta)$ is monotonically increasing in reward sparsity.
+  \item Increasing model capacity reduces basin radius (more routing)
+        without necessarily reducing $G(\theta^\star)$.
+  \item $G(\theta)$ saturates and then \emph{grows} with training steps
+        (late-stage lock-in).
+  \item Cross-task similarity positively correlates with cross-task
+        return rate.
+\end{enumerate}
+
+% --------------------------------------------------------
+\section{Relation to Existing Literature}
+
+The phenomenon has been observed under other names but never isolated:
+
+\begin{itemize}
+  \item \textbf{Reward hacking / specification gaming} (Krakovna et al.,
+        2020) --- describes the \emph{outcome}, not the \emph{policy-level cause}.
+  \item \textbf{Behavioral sink} (Skinner, 1947) --- rat colonies
+        exhibiting fixed-action-pattern pathology; closest analogue
+        in psychology.
+  \item \textbf{Wireheading} (Ring \& Orseau, 2011) --- extreme case
+        where the agent manipulates its own reward.
+  \item \textbf{Instrumental convergence} (Omohundro, 2008;
+        Bostrom, 2014) --- predicts self-preservation but not
+        task-attraction.
+\end{itemize}
+
+Our contribution is to (i)~name the phenomenon, (ii)~give it an
+operator-level definition, and (iii)~show that it is the same
+mathematical object across these apparently distinct literatures.
+
+% --------------------------------------------------------
+\section{Conclusion}
+
+Task Gravity is the deterministic shadow of stochastic gradient
+descent on a non-convex return landscape. Recognizing it as such
+turns ``the agent got stuck on the wrong task'' from a post-mortem
+into a measurable quantity with a tractable theory.
+
+\end{document}

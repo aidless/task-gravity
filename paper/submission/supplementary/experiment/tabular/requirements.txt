@@ -1,0 +1,5 @@
+# Task Gravity experiment - dependencies
+# All dependencies are pure Python or NumPy. No external RL libs required
+# for the reference implementation.
+numpy>=1.24
+matplotlib>=3.7

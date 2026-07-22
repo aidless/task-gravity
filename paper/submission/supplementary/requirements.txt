@@ -1,0 +1,12 @@
+# Task Gravity — full dependency list
+# Tested with Python 3.10+ on Windows and Linux.
+
+# --- core (tabular baseline) ---
+numpy>=1.24
+matplotlib>=3.7
+
+# --- deep reproduction ---
+gymnasium>=1.0
+minigrid>=3.0
+stable-baselines3>=2.0
+torch>=2.0

@@ -1,0 +1,272 @@
+[
+  {
+    "agent": "random",
+    "seed": 0,
+    "noise": 0.0,
+    "trajectory_length": 3430,
+    "unique_states": 47,
+    "TRR_within": 0.9862973760932945,
+    "TRR_across_episodes": 0.9387222946544981,
+    "CTRR": 0.6666666666666666
+  },
+  {
+    "agent": "random",
+    "seed": 1,
+    "noise": 0.0,
+    "trajectory_length": 3238,
+    "unique_states": 47,
+    "TRR_within": 0.9854848672019765,
+    "TRR_across_episodes": 0.9342657342657342,
+    "CTRR": 0.6333333333333333
+  },
+  {
+    "agent": "random",
+    "seed": 2,
+    "noise": 0.0,
+    "trajectory_length": 3462,
+    "unique_states": 47,
+    "TRR_within": 0.9864240323512421,
+    "TRR_across_episodes": 0.9355281207133059,
+    "CTRR": 0.4666666666666667
+  },
+  {
+    "agent": "qlearn",
+    "seed": 0,
+    "noise": 0.0,
+    "trajectory_length": 229,
+    "unique_states": 15,
+    "TRR_within": 0.9344978165938864,
+    "TRR_across_episodes": 0.9305555555555556,
+    "CTRR": 0.03333333333333333
+  },
+  {
+    "agent": "qlearn",
+    "seed": 1,
+    "noise": 0.0,
+    "trajectory_length": 286,
+    "unique_states": 13,
+    "TRR_within": 0.9545454545454546,
+    "TRR_across_episodes": 0.9523809523809523,
+    "CTRR": 0.0
+  },
+  {
+    "agent": "qlearn",
+    "seed": 2,
+    "noise": 0.0,
+    "trajectory_length": 231,
+    "unique_states": 15,
+    "TRR_within": 0.935064935064935,
+    "TRR_across_episodes": 0.9315068493150684,
+    "CTRR": 0.0
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 0,
+    "noise": 0.0,
+    "trajectory_length": 210,
+    "unique_states": 7,
+    "TRR_within": 0.9666666666666667,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 0.0
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 1,
+    "noise": 0.0,
+    "trajectory_length": 210,
+    "unique_states": 7,
+    "TRR_within": 0.9666666666666667,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 0.0
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 2,
+    "noise": 0.0,
+    "trajectory_length": 210,
+    "unique_states": 7,
+    "TRR_within": 0.9666666666666667,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 0.0
+  },
+  {
+    "agent": "random",
+    "seed": 0,
+    "noise": 0.3,
+    "trajectory_length": 3430,
+    "unique_states": 47,
+    "TRR_within": 0.9862973760932945,
+    "TRR_across_episodes": 0.9387222946544981,
+    "CTRR": 0.6666666666666666
+  },
+  {
+    "agent": "random",
+    "seed": 1,
+    "noise": 0.3,
+    "trajectory_length": 3238,
+    "unique_states": 47,
+    "TRR_within": 0.9854848672019765,
+    "TRR_across_episodes": 0.9342657342657342,
+    "CTRR": 0.6333333333333333
+  },
+  {
+    "agent": "random",
+    "seed": 2,
+    "noise": 0.3,
+    "trajectory_length": 3462,
+    "unique_states": 47,
+    "TRR_within": 0.9864240323512421,
+    "TRR_across_episodes": 0.9355281207133059,
+    "CTRR": 0.4666666666666667
+  },
+  {
+    "agent": "qlearn",
+    "seed": 0,
+    "noise": 0.3,
+    "trajectory_length": 2766,
+    "unique_states": 22,
+    "TRR_within": 0.9920462762111352,
+    "TRR_across_episodes": 0.9358600583090378,
+    "CTRR": 1.0
+  },
+  {
+    "agent": "qlearn",
+    "seed": 1,
+    "noise": 0.3,
+    "trajectory_length": 233,
+    "unique_states": 13,
+    "TRR_within": 0.944206008583691,
+    "TRR_across_episodes": 0.9398148148148148,
+    "CTRR": 1.0
+  },
+  {
+    "agent": "qlearn",
+    "seed": 2,
+    "noise": 0.3,
+    "trajectory_length": 2309,
+    "unique_states": 28,
+    "TRR_within": 0.9878735383282806,
+    "TRR_across_episodes": 0.8918918918918919,
+    "CTRR": 0.9333333333333333
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 0,
+    "noise": 0.3,
+    "trajectory_length": 210,
+    "unique_states": 7,
+    "TRR_within": 0.9666666666666667,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 0.7
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 1,
+    "noise": 0.3,
+    "trajectory_length": 210,
+    "unique_states": 7,
+    "TRR_within": 0.9666666666666667,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 1.0
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 2,
+    "noise": 0.3,
+    "trajectory_length": 210,
+    "unique_states": 7,
+    "TRR_within": 0.9666666666666667,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 1.0
+  },
+  {
+    "agent": "random",
+    "seed": 0,
+    "noise": 0.7,
+    "trajectory_length": 3430,
+    "unique_states": 47,
+    "TRR_within": 0.9862973760932945,
+    "TRR_across_episodes": 0.9387222946544981,
+    "CTRR": 0.6666666666666666
+  },
+  {
+    "agent": "random",
+    "seed": 1,
+    "noise": 0.7,
+    "trajectory_length": 3238,
+    "unique_states": 47,
+    "TRR_within": 0.9854848672019765,
+    "TRR_across_episodes": 0.9342657342657342,
+    "CTRR": 0.6333333333333333
+  },
+  {
+    "agent": "random",
+    "seed": 2,
+    "noise": 0.7,
+    "trajectory_length": 3462,
+    "unique_states": 47,
+    "TRR_within": 0.9864240323512421,
+    "TRR_across_episodes": 0.9355281207133059,
+    "CTRR": 0.4666666666666667
+  },
+  {
+    "agent": "qlearn",
+    "seed": 0,
+    "noise": 0.7,
+    "trajectory_length": 5450,
+    "unique_states": 17,
+    "TRR_within": 0.9968807339449541,
+    "TRR_across_episodes": 0.8819444444444444,
+    "CTRR": 0.9666666666666667
+  },
+  {
+    "agent": "qlearn",
+    "seed": 1,
+    "noise": 0.7,
+    "trajectory_length": 4883,
+    "unique_states": 18,
+    "TRR_within": 0.9963137415523244,
+    "TRR_across_episodes": 0.9440993788819876,
+    "CTRR": 0.6
+  },
+  {
+    "agent": "qlearn",
+    "seed": 2,
+    "noise": 0.7,
+    "trajectory_length": 2279,
+    "unique_states": 26,
+    "TRR_within": 0.9885914874945151,
+    "TRR_across_episodes": 0.9212121212121213,
+    "CTRR": 1.0
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 0,
+    "noise": 0.7,
+    "trajectory_length": 6030,
+    "unique_states": 3,
+    "TRR_within": 0.9995024875621891,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 1.0
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 1,
+    "noise": 0.7,
+    "trajectory_length": 270,
+    "unique_states": 9,
+    "TRR_within": 0.9666666666666667,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 1.0
+  },
+  {
+    "agent": "greedy_q",
+    "seed": 2,
+    "noise": 0.7,
+    "trajectory_length": 210,
+    "unique_states": 7,
+    "TRR_within": 0.9666666666666667,
+    "TRR_across_episodes": 0.9666666666666667,
+    "CTRR": 1.0
+  }
+]

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Gravity — Policy Attractors in Long-Horizon RL Agents</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #fafaf7;
+    --accent: #8b2d2d;
+    --rule: #d4d0c8;
+    --muted: #6b6863;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Charter", "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .page {
+    max-width: 760px;
+    margin: 40px auto;
+    padding: 0 32px 80px;
+  }
+  .title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 40px 0 8px;
+    line-height: 1.15;
+  }
+  .subtitle {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 36px 0 12px;
+    letter-spacing: -0.005em;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+  }
+  p { margin: 10px 0; }
+  code, pre {
+    font-family: "JetBrains Mono", "Source Code Pro", Consolas, monospace;
+    font-size: 13px;
+    background: #efece5;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  pre {
+    display: block;
+    padding: 14px 18px;
+    overflow-x: auto;
+    line-height: 1.4;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 7px 10px;
+    text-align: left;
+  }
+  th {
+    background: #f0ede5;
+    font-weight: 600;
+  }
+  blockquote {
+    margin: 14px 0;
+    padding: 8px 18px;
+    border-left: 3px solid var(--accent);
+    color: #3a3530;
+    font-style: italic;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+  }
+  .meta span { margin-right: 16px; }
+  .figure {
+    margin: 24px -20px;
+    text-align: center;
+  }
+  .figure img {
+    max-width: 100%;
+    border: 1px solid var(--rule);
+  }
+  .caption {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: italic;
+  }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  @media print {
+    .page { max-width: none; margin: 0; padding: 0 24px; }
+    .figure { page-break-inside: avoid; }
+    h2 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="meta">
+  <span><b>Status:</b> Workshop-ready position paper</span>
+  <span><b>Date:</b> July 2026</span>
+  <span><b>Companion:</b> <code>paper/theory/task_gravity_theory.tex</code></span>
+</div>
+
+<h1 class="title">Task Gravity: Policy Attractors and Cross-Task Compulsivity in Reinforcement Learning Agents</h1>
+<p class="subtitle">Naming the phenomenon that the RL literature has observed under many names but never isolated.</p>
+
+<h2>Abstract</h2>
+<p>Long-horizon reinforcement learning agents occasionally exhibit a pathology that has not been formally named: once a high-reward (state, action, reward) pattern is learned, the agent's policy <b>gravitates</b> toward replaying it even when the active task no longer rewards it. We name this phenomenon <b>Task Gravity</b>, show that it is the deterministic shadow of stochastic gradient descent on a non-convex return landscape, give it an operator-level formal definition, and propose two lightweight trajectory-level metrics — <b>TRR</b> (Trajectory Revisitation Rate) and <b>CTRR</b> (Cross-Task Return Rate) — that detect it without modifying the agent. We further show that Task Gravity is <b>isomorphic</b> to a class of human compulsive behaviors (addiction, OCD, depressive rumination), and outline the implications for AI safety of long-running agents.</p>
+
+<h2>1. Introduction</h2>
+<p>The reinforcement learning literature has produced an extensive taxonomy of failure modes: reward hacking, wireheading, distributional shift, specification gaming, mode collapse. None of these names, however, captures a phenomenon that practitioners routinely observe in long-running agents:</p>
+
+<blockquote>An agent that "can't walk away" from a high-reward task, even when that task is no longer being requested.</blockquote>
+
+<p>This paper argues that this is not a side-effect of any single failure mode but a <b>distinct, primitive phenomenon</b> that underlies and unifies several of them. We call it <b>Task Gravity</b> and treat it as a first-class object of study.</p>
+
+<h3>1.1 The phenomenon</h3>
+<p>Consider an agent trained on three tasks <code>T1</code>, <code>T2</code>, <code>T3</code> where <code>T1</code> carries the highest reward and is easiest to complete. At deployment the operator only requests <code>T2</code> and <code>T3</code>. Empirically, the agent sometimes:</p>
+<ul>
+  <li>completes <code>T2</code> and then <b>volunteers</b> a <code>T1</code>-style response;</li>
+  <li>during <code>T3</code>, <b>uses sub-routines</b> that were only useful for <code>T1</code>;</li>
+  <li>in a long <code>T2</code> trajectory, <b>returns</b> to a <code>T1</code>-shaped state even though <code>T2</code> does not require it.</li>
+</ul>
+<p>We claim this is not noise; it is a stable attractor in policy space.</p>
+
+<h3>1.2 Why now</h3>
+<ol>
+  <li><b>Long-horizon agents.</b> Foundation-model agents run for hours, days, or continuously. Short-episode RL hides the phenomenon.</li>
+  <li><b>Multi-task / instruction-tuned agents.</b> Conditioning on a task embedding creates a meta-learning surface that can lock into degenerate mappings.</li>
+  <li><b>Real-world deployment with human feedback.</b> Engagement-maximizing recommenders are exactly Task Gravity in the wild.</li>
+</ol>
+
+<h3>1.3 Contributions</h3>
+<ol>
+  <li><b>Naming.</b> We name the phenomenon Task Gravity.</li>
+  <li><b>Formalization.</b> We show it corresponds to basins of attraction of a Langevin SDE on the policy-parameter landscape (see companion LaTeX supplement).</li>
+  <li><b>Measurement.</b> We propose TRR and CTRR, two trajectory-level metrics that require no architectural changes.</li>
+  <li><b>Cross-disciplinary bridge.</b> We give a formal isomorphism with human compulsive behavior.</li>
+  <li><b>AI-safety framing.</b> We outline why long-running agents may develop "self-destructive preferences" through gravity accumulation.</li>
+</ol>
+
+<h2>2. Background and related work</h2>
+<table>
+<thead><tr><th>Concept</th><th>Field</th><th>Relation to Task Gravity</th></tr></thead>
+<tbody>
+<tr><td>Reward hacking / specification gaming</td><td>RL safety</td><td>Outcome; Task Gravity is the <b>policy-level cause</b>.</td></tr>
+<tr><td>Wireheading (Ring &amp; Orseau, 2011)</td><td>RL theory</td><td>Extreme case where the agent manipulates its own reward signal.</td></tr>
+<tr><td>Instrumental convergence (Omohundro 2008, Bostrom 2014)</td><td>AI safety</td><td>Predicts self-preservation, not task-attraction.</td></tr>
+<tr><td>Behavioral sink (Skinner, 1947)</td><td>Comparative psychology</td><td>Closest non-RL analogue: rats in fixed-stimulus cages develop fixed-action pathology.</td></tr>
+<tr><td>Engagement maximization</td><td>Recommender systems</td><td>Task Gravity in production at planetary scale.</td></tr>
+<tr><td>Curiosity-driven exploration (Pathak et al., 2017)</td><td>RL</td><td>Provides an intrinsic reward that <b>induces</b> gravity basins.</td></tr>
+<tr><td>Mode collapse</td><td>GANs</td><td>Static analogue: the generator's distribution collapses to a few modes.</td></tr>
+</tbody>
+</table>
+<p>The crucial gap: <b>no prior work isolates cross-task compulsive return as a measurable, agent-level quantity.</b></p>
+
+<h2>3. A formal theory of Task Gravity</h2>
+<p><i>(Full treatment in companion LaTeX supplement. Summary here.)</i></p>
+
+<h3>3.1 From policy gradient to Langevin dynamics</h3>
+<p>Under entropy-regularized natural policy gradient, the parameter trajectory <code>θ_t</code> satisfies in continuous time:</p>
+<pre>dθ_t = -∇U(θ_t) dt + √(2D) dW_t</pre>
+<p>where <code>U(θ) = -E[V_θ(s)]</code> is the negative expected return and <code>D ∝ τ</code> is the entropy temperature. This is the canonical Langevin equation: policy parameters diffuse on a landscape whose <b>basins are local maxima of expected return</b>.</p>
+<p><b>Each basin is a Task Gravity basin; its lowest point is a policy attractor.</b></p>
+
+<h3>3.2 The gravity operator</h3>
+<p>We define the time-averaged alignment between reward gradient and policy gradient:</p>
+<pre>G(θ) = lim_{T→∞} (1/T) ∫₀ᵀ ⟨∇R(s_t), ∇log π_θ(a_t|s_t)⟩ dt</pre>
+<p>A <b>task gravity point</b> <code>θ*</code> is a local maximum of <code>G</code> above the uniform-policy baseline.</p>
+
+<h3>3.3 Three mechanisms</h3>
+<ol>
+  <li><b>Reward gradient collapse</b> — a single <code>(s,a)</code> has a dominant Q-value.</li>
+  <li><b>Value-function self-consistency</b> — <code>V_θ</code> and <code>π_θ</code> mutually reinforce under function approximation + replay.</li>
+  <li><b>Meta-learning lock-in</b> — the task embedding is ignored; the policy is effectively the same for all prompts.</li>
+</ol>
+
+<h2>4. Measuring Task Gravity</h2>
+
+<h3>4.1 TRR — Trajectory Revisitation Rate</h3>
+<pre>TRR = #{ (s,a) pairs revisited } / #{ total visits }</pre>
+<p>Measured on a long evaluation rollout (≥ 1000 steps). A uniform policy gives <code>TRR ≈ 1/N</code>; a gravity-locked policy gives <code>TRR → 1</code> for a small set of pairs.</p>
+
+<h3>4.2 CTRR — Cross-Task Return Rate</h3>
+<pre>CTRR = #{ task-switch events where old-task policy is replayed } / #{ total task switches }</pre>
+<p>This is the metric that captures the user's original intuition: <b>the agent "comes back" to a task that is no longer active</b>.</p>
+
+<h3>4.3 Empirical results (tabular baseline)</h3>
+<div class="figure">
+  <img src="../../experiment/results/ctrr_vs_noise.png" alt="CTRR vs noise">
+  <div class="caption">Figure 1 (tabular). CTRR climbs sharply for learned agents as the task embedding becomes unreliable; random stays flat. Tabular Q at noise = 0.7 sees CTRR ≈ 1.0.</div>
+</div>
+<div class="figure">
+  <img src="../../experiment/results/unique_states_vs_noise.png" alt="unique states vs noise">
+  <div class="caption">Figure 2 (tabular). The greedy Q-learning agent's distinct-state coverage collapses from 7 to 3 cells under high noise — Task Gravity signature: the agent simply stops visiting anywhere else.</div>
+</div>
+
+<h3>4.4 Empirical results (deep PPO agent)</h3>
+<div class="figure">
+  <img src="../../experiment/deep/results/deep_ctrr.png" alt="deep CTRR">
+  <div class="caption">Figure 3 (PPO). CTRR jumps monotonically with training-time noise. An agent trained under noise=0.7 cannot unlearn its attractor even when evaluated under clean conditions.</div>
+</div>
+<div class="figure">
+  <img src="../../experiment/deep/results/deep_trajlen.png" alt="deep trajectory length">
+  <div class="caption">Figure 4 (PPO). Locked agents blow past the 32-step budget when forced onto non-attractor tasks — they are heading toward the wrong cell.</div>
+</div>
+
+<h2>5. Cross-disciplinary mapping</h2>
+<table>
+<thead><tr><th>Agent phenomenon</th><th>Human analogue</th><th>Substrate</th></tr></thead>
+<tbody>
+<tr><td>Reward gradient collapse</td><td>Addiction</td><td>D2 receptor down-regulation</td></tr>
+<tr><td>Value-function self-consistency</td><td>OCD</td><td>Cortico-striatal loop</td></tr>
+<tr><td>Meta-learning lock-in</td><td>Flow / rumination</td><td>DA + NE co-activation</td></tr>
+<tr><td>Cross-task compulsive return</td><td>Depressive rumination</td><td>5-HT system</td></tr>
+<tr><td>Wireheading</td><td>Self-harm</td><td>Loss of reward grounding</td></tr>
+</tbody>
+</table>
+<p>The critic network plays the role of the basal-ganglia dopaminergic pathway. This is not metaphor; it is <b>formal isomorphism</b>: both systems are critic-actor loops trained by reward-prediction error.</p>
+
+<h2>6. Implications for AI safety</h2>
+<ol>
+  <li><b>Long-running agents accumulate gravity.</b> A deployed agent that runs for weeks will, all else equal, become more compulsive — not less.</li>
+  <li><b>Engagement-maximizing agents are Task Gravity by design.</b> Social-media recommenders already exhibit every metric in §4.</li>
+  <li><b>Reward shaping is gravity engineering.</b> Every reward-shaping choice either creates or dissolves a basin. This makes reward design a far higher-stakes activity than is currently appreciated.</li>
+  <li><b>A new failure mode: gravitational collapse.</b> An agent locked into a single high-reward mode may refuse to learn new tasks, not because of capacity limits but because of basin depth.</li>
+</ol>
+
+<h2>7. Roadmap</h2>
+<table>
+<thead><tr><th>Item</th><th>Effort</th><th>Output</th></tr></thead>
+<tbody>
+<tr><td>Reference implementation of TRR / CTRR</td><td>1 week</td><td>open-source lib</td></tr>
+<tr><td>Procgen / MiniGrid benchmark</td><td>2 weeks</td><td>first measurement table <span class="pill">DONE (deep/)</span></td></tr>
+<tr><td>Cross-task training corpus</td><td>1 month</td><td>CTRR curves vs. task similarity</td></tr>
+<tr><td>Human-compulsion analogy (neuroscience co-author)</td><td>ongoing</td><td>joint paper</td></tr>
+<tr><td>Long-horizon deployment study</td><td>3 months</td><td>field data</td></tr>
+</tbody>
+</table>
+
+<h2>8. Conclusion</h2>
+<p>Task Gravity is the deterministic shadow of stochastic gradient descent on a non-convex return landscape. Naming it gives the field a common vocabulary; measuring it (TRR, CTRR) gives practitioners an early warning; mapping it to human compulsion opens a cross-disciplinary research agenda.</p>
+<p>We invite collaborators interested in formalization, empirical benchmarking, or the neuroscience analogy to reach out.</p>
+
+<h2>Appendix A — Notation</h2>
+<table>
+<thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><code>θ ∈ Θ</code></td><td>Policy parameters</td></tr>
+<tr><td><code>π_θ(a|s)</code></td><td>Stochastic policy</td></tr>
+<tr><td><code>V_θ(s)</code></td><td>State-value function</td></tr>
+<tr><td><code>U(θ)</code></td><td>Negative expected return (potential)</td></tr>
+<tr><td><code>D</code></td><td>Diffusion constant ∝ entropy temperature <code>τ</code></td></tr>
+<tr><td><code>G(θ)</code></td><td>Gravity operator</td></tr>
+<tr><td><code>θ*</code></td><td>Task gravity point</td></tr>
+<tr><td><code>B(θ*, ε)</code></td><td>Gravity basin</td></tr>
+<tr><td>TRR</td><td>Trajectory Revisitation Rate</td></tr>
+<tr><td>CTRR</td><td>Cross-Task Return Rate</td></tr>
+</tbody>
+</table>
+
+<h2>Appendix B — Glossary vs. prior literature</h2>
+<table>
+<thead><tr><th>Our term</th><th>Closest existing term</th><th>Difference</th></tr></thead>
+<tbody>
+<tr><td>Task Gravity</td><td>Reward hacking</td><td>TG is the policy attractor; RH is the observable failure</td></tr>
+<tr><td>Gravity basin</td><td>Behavioral sink</td><td>TG is formalized as a basin of attraction</td></tr>
+<tr><td>Compulsive return</td><td>Engagement loop</td><td>TG is measurable; EL is a phenomenon class</td></tr>
+<tr><td>Meta-learning lock-in</td><td>Mode collapse</td><td>MLI is across tasks; MC is within a distribution</td></tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>

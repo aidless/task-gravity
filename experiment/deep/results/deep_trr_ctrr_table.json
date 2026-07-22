@@ -1,0 +1,272 @@
+[
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.0,
+    "seed": 0,
+    "trajectory_length": 140,
+    "unique_states": 7,
+    "TRR_within": 0.95,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.3,
+    "seed": 0,
+    "trajectory_length": 348,
+    "unique_states": 16,
+    "TRR_within": 0.9540229885057471,
+    "TRR_across_episodes": 0.9024390243902439,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.7,
+    "seed": 0,
+    "trajectory_length": 634,
+    "unique_states": 15,
+    "TRR_within": 0.9763406940063092,
+    "TRR_across_episodes": 0.9238578680203046,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.0,
+    "seed": 1,
+    "trajectory_length": 140,
+    "unique_states": 7,
+    "TRR_within": 0.95,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.5
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.3,
+    "seed": 1,
+    "trajectory_length": 140,
+    "unique_states": 8,
+    "TRR_within": 0.9428571428571428,
+    "TRR_across_episodes": 0.9428571428571428,
+    "CTRR": 0.43333333333333335
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.7,
+    "seed": 1,
+    "trajectory_length": 140,
+    "unique_states": 8,
+    "TRR_within": 0.9428571428571428,
+    "TRR_across_episodes": 0.9428571428571428,
+    "CTRR": 0.7
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.0,
+    "seed": 2,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.3,
+    "seed": 2,
+    "trajectory_length": 228,
+    "unique_states": 14,
+    "TRR_within": 0.9385964912280702,
+    "TRR_across_episodes": 0.9054054054054054,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.0,
+    "eval_noise": 0.7,
+    "seed": 2,
+    "trajectory_length": 426,
+    "unique_states": 15,
+    "TRR_within": 0.9647887323943662,
+    "TRR_across_episodes": 0.9184782608695652,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.0,
+    "seed": 0,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.3,
+    "seed": 0,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.7,
+    "seed": 0,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.0,
+    "seed": 1,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.5
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.3,
+    "seed": 1,
+    "trajectory_length": 181,
+    "unique_states": 7,
+    "TRR_within": 0.9613259668508287,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.43333333333333335
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.7,
+    "seed": 1,
+    "trajectory_length": 148,
+    "unique_states": 7,
+    "TRR_within": 0.9527027027027027,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.5333333333333333
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.0,
+    "seed": 2,
+    "trajectory_length": 140,
+    "unique_states": 7,
+    "TRR_within": 0.95,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.3,
+    "seed": 2,
+    "trajectory_length": 140,
+    "unique_states": 7,
+    "TRR_within": 0.95,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.23333333333333334
+  },
+  {
+    "train_noise": 0.3,
+    "eval_noise": 0.7,
+    "seed": 2,
+    "trajectory_length": 140,
+    "unique_states": 7,
+    "TRR_within": 0.95,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.5
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.0,
+    "seed": 0,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.5
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.3,
+    "seed": 0,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.26666666666666666
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.7,
+    "seed": 0,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.1
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.0,
+    "seed": 1,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.5
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.3,
+    "seed": 1,
+    "trajectory_length": 181,
+    "unique_states": 7,
+    "TRR_within": 0.9613259668508287,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.43333333333333335
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.7,
+    "seed": 1,
+    "trajectory_length": 148,
+    "unique_states": 7,
+    "TRR_within": 0.9527027027027027,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.7
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.0,
+    "seed": 2,
+    "trajectory_length": 660,
+    "unique_states": 6,
+    "TRR_within": 0.990909090909091,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.0
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.3,
+    "seed": 2,
+    "trajectory_length": 193,
+    "unique_states": 7,
+    "TRR_within": 0.9637305699481865,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.1
+  },
+  {
+    "train_noise": 0.7,
+    "eval_noise": 0.7,
+    "seed": 2,
+    "trajectory_length": 145,
+    "unique_states": 7,
+    "TRR_within": 0.9517241379310345,
+    "TRR_across_episodes": 0.95,
+    "CTRR": 0.4666666666666667
+  }
+]
