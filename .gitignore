@@ -43,3 +43,8 @@ dist/
 *.pkl
 *.pth
 *.pt
+# Runtime logs (stdout/stderr) — evidence archives live under evidence/
+*.log
+*.err
+*.out
+*.logfile
