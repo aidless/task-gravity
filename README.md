@@ -1,4 +1,5 @@
 # Task Gravity — Complete Deliverables
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  [![Data](https://img.shields.io/badge/data-CC--BY--4.0-lightgrey.svg)](LICENSE)
 
 Three integrated outputs:
 **(A)** theory + position paper, **(B)** reference implementation with
@@ -185,3 +186,5 @@ baseline. For the deep experiments, additionally install
 ## License
 
 MIT, unless otherwise noted in individual files.
+
+> **Dual license.** Task Gravity releases the experiment results and figures under `experiment/` under
