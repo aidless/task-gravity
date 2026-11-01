@@ -197,6 +197,88 @@ Known discrepancy: the tabular table above lists `unique_states = 3` for
 
 ---
 
+## What is proven / what is not proven
+
+**Proven (each number recomputed from the committed CSVs):**
+
+1. **Tabular baseline reproduces** — re-running the seed sweep
+   (`python -u -m src.experiment`, seeds 0–2 per (agent, noise)) regenerates
+   `experiment/results/trr_ctrr_table.csv` value-for-value. Verified means:
+   `qlearn` CTRR 0.01 (noise 0) → 0.98 (0.3) → 0.86 (0.7); `greedy_q`
+   0.00 → 0.90 → 1.00; `random` 0.59 (noise-invariant).
+2. **State-coverage collapse** — `unique_states` mean falls from 47
+   (`random`) / 14.3 (`qlearn`, noise 0) to 6.3 (`greedy_q`, noise 0.7,
+   per-seed [3, 9, 7]). The pattern is real in the recorded data.
+3. **Deep PPO reproduction is committed** — `experiment/deep/results/deep_trr_ctrr_table.csv`
+   (27 rows, 3 seeds per (train_noise, eval_noise)). Verified means:
+   train/eval 0.0/0.0 → CTRR 0.17, 0.0/0.7 → 0.23, 0.3/0.7 → 0.34,
+   0.7/0.0 → 0.33, 0.7/0.7 → 0.42. The "trained under 0.7 cannot route
+   even at eval 0.0" pattern (0.33) is in the data.
+4. **Deterministic seeding** — env, agent, and exploration RNG each get a
+   `np.random.RandomState` from the run seed (`experiment/src/env.py`,
+   `experiment/src/agents.py`, `experiment/src/experiment.py`); deep
+   checkpoints are keyed by `(train_noise, seed)`.
+
+**Not proven (honest boundaries):**
+
+1. **The `greedy_q` unique_states=3 headline is the seed-0 value, not the mean.**
+   The committed CSV's per-seed values are 3/9/7 (mean 6.3), and
+   `REPORT.md`'s "3.0 ± 0.0" also reflects only seed 0. Do **not** quote
+   "14 → 3" as a mean comparison; quote the seed-0 value or the mean (6.3)
+   and say which.
+2. **No claim that CTRR=1.00 means "correct routing".** CTRR measures
+   whether a non-attractor segment *ends* at the attractor task, not
+   whether the agent performed the task correctly. `REPORT.md` §3.4
+   explicitly explains why `random`'s CTRR≈0.6 is **not** Task Gravity.
+3. **No generalization beyond 2-task / 2-noise tabular cells.** The
+   tabular baseline is a 3×3 (agent × noise) grid over a single
+   environment; the deep sweep is 3×3 (train × eval) over one PPO
+   configuration. Extrapolating to other envs/agents is untested.
+4. **Deep results are not re-run here.** They require `stable-baselines3`,
+   `torch`, `gymnasium`, `minigrid`; the committed CSVs are the recorded
+   outputs. The **tabular** baseline is re-runnable with `numpy` only
+   (root `requirements.txt`).
+
+---
+
+## Reproduce (numbers above)
+
+All means above are recomputed from the committed CSVs — no number is
+copied from memory:
+
+```bash
+# 1) Tests (offline, seeded — 4 pass)
+python3 -m pytest tests/ -q
+
+# 2) Tabular means recomputed from CSV
+python3 - <<'EOF'
+import csv
+from collections import defaultdict
+rows = defaultdict(list)
+with open("experiment/results/trr_ctrr_table.csv") as f:
+    for r in csv.DictReader(f):
+        rows[(r["agent"], r["noise"])].append(float(r["CTRR"]))
+for key in sorted(rows):
+    v = rows[key]
+    print(f"{key[0]:<10} noise={key[1]:<4} CTRR_mean={sum(v)/len(v):.2f}")
+EOF
+
+# 3) Deep means recomputed from CSV
+python3 - <<'EOF'
+import csv
+from collections import defaultdict
+rows = defaultdict(list)
+with open("experiment/deep/results/deep_trr_ctrr_table.csv") as f:
+    for r in csv.DictReader(f):
+        rows[(r["train_noise"], r["eval_noise"])].append(float(r["CTRR"]))
+for key in sorted(rows):
+    v = rows[key]
+    print(f"train={key[0]} eval={key[1]} CTRR_mean={sum(v)/len(v):.2f}")
+EOF
+```
+
+---
+
 ## Status
 
 | Deliverable | Status |
