@@ -79,6 +79,9 @@ def main():
         return
     rows = load_rows(csv_path)
     out_dir = ROOT / "experiment" / "results"
+    from src.series import write_all
+
+    write_all()
     plot_metric(rows, "CTRR", "CTRR",
                 "Cross-Task Return Rate vs Task-Embedding Noise",
                 out_dir / "ctrr_vs_noise.png", ylim=(0, 1.05))

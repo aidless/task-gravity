@@ -47,10 +47,9 @@ cd ../deep && python -u -m src.run --timesteps 10000
 
 > *Is this paper ready to submit?*
 
-Yes for a **workshop** or **position-paper track**. Not yet for a
-**main conference** — main conferences expect benchmark-level
-experimental results, which requires running Open Problem OP-3
-(64-task corpus).
+No. It is an unsubmitted draft. Not accepted. The committed evidence is a
+7×7 tabular sweep plus a short PPO run whose training budget is UNKNOWN.
+A main-conference benchmark (Open Problem OP-3) has not been run.
 
 > *What's the main risk for the paper?*
 

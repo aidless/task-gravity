@@ -1,0 +1,223 @@
+{
+  "source": "experiment/deep/results/deep_trr_ctrr_table.json",
+  "std": "population",
+  "png_byte_identity": "UNKNOWN",
+  "points": [
+    {
+      "metric": "CTRR",
+      "mean": 0.16666666666666666,
+      "pstdev": 0.23570226039551584,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.14444444444444446,
+      "pstdev": 0.2042752923427804,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.2333333333333333,
+      "pstdev": 0.3299831645537222,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.7
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.16666666666666666,
+      "pstdev": 0.23570226039551584,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.22222222222222224,
+      "pstdev": 0.17708197167232476,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.3444444444444444,
+      "pstdev": 0.24393887111222387,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.7
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.3333333333333333,
+      "pstdev": 0.23570226039551584,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.26666666666666666,
+      "pstdev": 0.13608276348795434,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.4222222222222222,
+      "pstdev": 0.24695678634325408,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.7
+    },
+    {
+      "metric": "unique_states",
+      "mean": 6.666666666666667,
+      "pstdev": 0.4714045207910317,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "unique_states",
+      "mean": 12.666666666666666,
+      "pstdev": 3.39934634239519,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "unique_states",
+      "mean": 12.666666666666666,
+      "pstdev": 3.2998316455372216,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.7
+    },
+    {
+      "metric": "unique_states",
+      "mean": 6.333333333333333,
+      "pstdev": 0.4714045207910317,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "unique_states",
+      "mean": 6.666666666666667,
+      "pstdev": 0.4714045207910317,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "unique_states",
+      "mean": 6.666666666666667,
+      "pstdev": 0.4714045207910317,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.7
+    },
+    {
+      "metric": "unique_states",
+      "mean": 6.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "unique_states",
+      "mean": 6.666666666666667,
+      "pstdev": 0.4714045207910317,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "unique_states",
+      "mean": 6.666666666666667,
+      "pstdev": 0.4714045207910317,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.7
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 313.3333333333333,
+      "pstdev": 245.13035081133648,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 238.66666666666666,
+      "pstdev": 85.24995927011084,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 400.0,
+      "pstdev": 202.510905056164,
+      "n": 3,
+      "train_noise": 0.0,
+      "eval_noise": 0.7
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 486.6666666666667,
+      "pstdev": 245.13035081133648,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 327.0,
+      "pstdev": 236.0607266502979,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 316.0,
+      "pstdev": 243.26665753174368,
+      "n": 3,
+      "train_noise": 0.3,
+      "eval_noise": 0.7
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 660.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.0
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 344.6666666666667,
+      "pstdev": 223.02814969316216,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.3
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 317.6666666666667,
+      "pstdev": 242.0693197320874,
+      "n": 3,
+      "train_noise": 0.7,
+      "eval_noise": 0.7
+    }
+  ]
+}

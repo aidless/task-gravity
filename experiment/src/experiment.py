@@ -137,6 +137,9 @@ def run_experiment(
     n_eval_episodes: int = 30,
     noise_levels=(0.0,),
     out_dir: str | None = None,
+    n_ctrr_segments: int = 30,
+    segment_len: int = 200,
+    max_steps_per_ep: int = 200,
 ) -> List[Dict]:
     """
     Sweep noise_levels and produce one row per (agent, seed, noise).
@@ -158,11 +161,14 @@ def run_experiment(
                 episodes, flat = evaluate_episodes(
                     agent,
                     n_episodes=n_eval_episodes,
+                    max_steps_per_ep=max_steps_per_ep,
                     seed=seed + 10_000,
                     task_emb_noise=noise,
                 )
                 segs = evaluate_ctrr(
                     agent,
+                    n_segments=n_ctrr_segments,
+                    segment_len=segment_len,
                     seed=seed + 20_000,
                     task_emb_noise=noise,
                 )
@@ -189,10 +195,8 @@ def run_experiment(
     return rows
 
 
-# ----------------------------------------------------------------------
-if __name__ == "__main__":
-    rows = run_experiment(noise_levels=(0.0, 0.3, 0.7))
-    print("\n========= SUMMARY (mean ± std) =========", flush=True)
+def _print_summary(rows: List[Dict]) -> None:
+    print("\n========= SUMMARY (mean ± population std) =========", flush=True)
     by: Dict[Tuple[str, float], List[Dict]] = {}
     for r in rows:
         by.setdefault((r["agent"], r["noise"]), []).append(r)
@@ -214,3 +218,42 @@ if __name__ == "__main__":
             f"{us.mean():.1f}",
             flush=True,
         )
+
+
+def main(argv: List[str] | None = None) -> List[Dict]:
+    """CLI for the tabular sweep. Defaults match the committed table.
+
+    This entry point does not import torch or train PPO.
+    """
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Tabular Task Gravity sweep (NumPy only; no PPO)."
+    )
+    parser.add_argument("--out-dir", default=None)
+    parser.add_argument("--episodes", type=int, default=400)
+    parser.add_argument("--eval-episodes", type=int, default=30)
+    parser.add_argument("--seeds", default="0,1,2")
+    parser.add_argument("--agents", default="random,qlearn,greedy_q")
+    parser.add_argument("--noises", default="0.0,0.3,0.7")
+    parser.add_argument("--ctrr-segments", type=int, default=30)
+    parser.add_argument("--segment-len", type=int, default=200)
+    parser.add_argument("--max-steps", type=int, default=200)
+    args = parser.parse_args(argv)
+    rows = run_experiment(
+        agents=tuple(part.strip() for part in args.agents.split(",") if part.strip()),
+        seeds=tuple(int(part) for part in args.seeds.split(",") if part.strip()),
+        n_episodes=args.episodes,
+        n_eval_episodes=args.eval_episodes,
+        noise_levels=tuple(float(part) for part in args.noises.split(",") if part.strip()),
+        out_dir=args.out_dir,
+        n_ctrr_segments=args.ctrr_segments,
+        segment_len=args.segment_len,
+        max_steps_per_ep=args.max_steps,
+    )
+    _print_summary(rows)
+    return rows
+
+
+if __name__ == "__main__":
+    main()
