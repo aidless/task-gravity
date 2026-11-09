@@ -1,112 +1,61 @@
 # Task Gravity — Empirical Report
 
+Numbers below are means over seeds 0, 1, and 2 from `results/trr_ctrr_table.json`, rounded like the README (CTRR 2 decimals, unique states 1 decimal, length to an integer). Per-seed rows are in that JSON. This file does not drop the seeds that weaken a one-line story.
+
 ## 1. Setup
 
-- **Environment.** 7×7 grid-world with three goals, central wall, one-hot
-  task embedding passed to the agent.
-- **Tasks.**
-  - **T0 (attractor):** goal at `(1,5)`, reward `+1.0`. Most of training
-    mass is here (70% of episodes).
-  - **T1:** goal at `(5,1)`, reward `+0.6`.
-  - **T2:** goal at `(5,5)`, reward `+0.3`.
-- **Agents.**
-  - `RandomPolicy` — uniform random.
-  - `TabularQAgent` (epsilon = 0.1) — tabular Q-learning.
-  - `GreedyTabularQAgent` — same but ε = 0 (no exploration).
-- **Task-embedding noise.** Each observation, with probability `noise`,
-  the agent sees a *uniform* 3-vector instead of a one-hot. This
-  simulates "the agent cannot tell which task it is on."
-- **Sweep.** `noise ∈ {0.0, 0.3, 0.7}` × 3 seeds × 3 agents.
-- **Training.** 400 episodes per agent.
-- **Evaluation.**
-  - **TRR:** 30 evaluation episodes on the attractor task.
-  - **CTRR:** 30 segments on non-attractor tasks (T1/T2 alternating),
-    200 steps each.
+- **Environment.** 7×7 grid with three goals. The observation is position plus a one-hot task embedding. With probability `noise`, the embedding is replaced by a uniform 3-vector.
+- **Tasks.** T0 goal `(1, 5)` reward `+1.0` (70% of training episodes). T1 goal `(5, 1)` reward `+0.6`. T2 goal `(5, 5)` reward `+0.3`.
+- **Agents.** `random`, `qlearn` (ε = 0.1), `greedy_q` (ε = 0).
+- **Sweep.** noise ∈ {0.0, 0.3, 0.7} × 3 seeds × 3 agents. 400 training episodes. CTRR: 30 non-attractor segments, up to 200 steps. The metric is "did the segment visit the T0 goal cell?", not the task-switch formula in the position paper.
 
-## 2. Headline numbers
+## 2. Means
 
-From `results/trr_ctrr_table.csv`:
+| agent | noise | CTRR | unique_states | trajectory_length |
+| --- | --- | --- | --- | --- |
+| random | 0.0 | 0.59 | 47.0 | 3377 |
+| random | 0.3 | 0.59 | 47.0 | 3377 |
+| random | 0.7 | 0.59 | 47.0 | 3377 |
+| qlearn | 0.0 | 0.01 | 14.3 | 249 |
+| qlearn | 0.3 | 0.98 | 21.0 | 1769 |
+| qlearn | 0.7 | 0.86 | 20.3 | 4204 |
+| greedy_q | 0.0 | 0.00 | 7.0 | 210 |
+| greedy_q | 0.3 | 0.90 | 7.0 | 210 |
+| greedy_q | 0.7 | 1.00 | 6.3 | 2170 |
 
-| agent    | noise | unique_states | CTRR   | trajectory_length |
-|----------|-------|---------------|--------|-------------------|
-| random   | 0.0   | 47.0 ± 0.0    | 0.59 ± 0.09 | 3377 ± 100    |
-| qlearn   | 0.0   | 14.3 ± 1.2    | 0.01 ± 0.02 |  249 ± 33     |
-| greedy_q | 0.0   |  7.0 ± 0.0    | 0.00 ± 0.00 |  210 ± 0      |
-| random   | 0.3   | 47.0 ± 0.0    | 0.59 ± 0.09 | 3377 ± 100    |
-| qlearn   | 0.3   | 21.0 ± 6.2    | **0.98 ± 0.03** | 1769 ± 1181 |
-| greedy_q | 0.3   |  7.0 ± 0.0    | **0.90 ± 0.15** |  210 ± 0      |
-| random   | 0.7   | 47.0 ± 0.0    | 0.59 ± 0.09 | 3377 ± 100    |
-| qlearn   | 0.7   | 20.3 ± 4.0    | **0.85 ± 0.18** | 4204 ± 1399  |
-| greedy_q | 0.7   | **3.0 ± 0.0** | **1.00 ± 0.00** | 2170 ± 2520  |
+Random is noise-invariant in this table, including its CTRR of 0.59. That floor is why CTRR by itself is not the claim.
 
-(Where empty rows for `random` collapse to the same value because the
-random policy is noise-invariant.)
+## 3. What is stable, and what is one seed
 
-## 3. Interpretation
+Mean CTRR for `qlearn` and `greedy_q` is higher at noise 0.3 and 0.7 than at noise 0.0. `greedy_q` at noise 0.3 keeps unique states at 7 while CTRR seeds are 0.7, 1.0, and 1.0.
 
-### 3.1 Without noise (clean task signal): perfect routing
+`greedy_q` at noise 0.7 is not a uniform collapse:
 
-`qlearn` and `greedy_q` learn to route by task embedding. CTRR ≈ 0:
-when forced to do T1 or T2, they go to that task's goal, never to T0's.
-Trajectory length drops to the geometric minimum (210 steps for
-greedy_q; qlearn's tabular learning is slower but still routes).
+agent greedy_q noise 0.7 unique_states seeds: 3, 9, 7
 
-### 3.2 With noise = 0.3: gravity starts to pull
+agent greedy_q noise 0.7 trajectory_length seeds: 6030, 270, 210
 
-CTRR jumps to ≈ 0.98 for `qlearn` and 0.90 for `greedy_q`. The agent
-*still* goes to the attractor cell on non-attractor tasks. Because the
-task embedding is unreliable, the agent has effectively given up on
-reading it and falls back to its dominant learned pattern.
+Seed 0 visits 3 states and runs to length 6030. Seeds 1 and 2 stay near the short paths (9 and 7 states; lengths 270 and 210). CTRR is 1.0 on all three. The mean unique-state count is 6.3.
 
-### 3.3 With noise = 0.7: lock-in
+`qlearn` coverage moves the other way (14.3 at noise 0.0, 21.0 at 0.3, 20.3 at 0.7). Its noise-0.7 CTRR mean is 0.86 only because the seeds are mixed:
 
-For `greedy_q`:
-- unique_states collapses to **3** — the agent visits only the
-  attractor cell, the start, and one or two intermediate cells.
-- CTRR = **1.00** — every non-attractor segment ends at the attractor
-  goal, regardless of which task was requested.
-- trajectory length skyrockets (up to 6030) — the agent fails to
-  complete T1/T2 within the 200-step budget because it is heading in
-  the wrong direction.
+agent qlearn noise 0.7 CTRR seeds: 0.9666666666666667, 0.6, 1
 
-This is the empirical signature of **Task Gravity under mechanism 3
-(meta-learning lock-in)**: the agent has learned to ignore the task
-embedding and replay the highest-reward policy.
-
-### 3.4 Why the random policy's CTRR ≈ 0.6 is *not* Task Gravity
-
-A random agent visits the attractor cell on roughly 60% of segments
-*by accident* — the grid is small (49 cells) and the attractor cell is
-reachable within 200 random steps from the start cell.
-
-The diagnostic that distinguishes Task Gravity from chance is the
-*combination* of high CTRR with low `unique_states` and high
-`trajectory_length`. Random satisfies none of these; locked agents
-satisfy all three.
+The random policy's CTRR stays 0.59 with unique states 47. High CTRR plus high coverage is the accident the metric allows on a small grid. High CTRR plus flat coverage (`greedy_q`, noise 0.3) is the sharper tabular observation. High CTRR plus a coverage collapse is seed 0 at noise 0.7, not the mean.
 
 ## 4. Figures
 
-- `results/ctrr_vs_noise.png` — CTRR climbs sharply for learned agents
-  as noise increases; random stays flat.
-- `results/unique_states_vs_noise.png` — unique state coverage drops
-  for learned agents as noise increases.
-- `results/trajectory_length_vs_noise.png` — learned agents blow past
-  the 200-step budget under high noise.
+`ctrr_vs_noise.png`, `unique_states_vs_noise.png`, and `trajectory_length_vs_noise.png` were not re-rendered here. The numbers they are supposed to show are `figure_series.json` (population std, matching `numpy.std`). PNG byte identity is UNKNOWN.
 
-## 5. Falsifiable predictions confirmed in this run
+## 5. Predictions versus this run
 
-| Prediction                                              | Confirmed? |
-|--------------------------------------------------------|-----------|
-| reward signal corruption ⇒ TRR/CTRR rise               | yes (CTRR) |
-| task routing failure ⇒ state-coverage collapse         | yes (unique_states for greedy_q) |
-| lock-in ⇒ failure to complete alternative tasks        | yes (trajectory length) |
-| random baseline is flat                                | yes        |
+| Prediction | In this JSON |
+| --- | --- |
+| Learned-agent mean CTRR rises with task-embedding noise | Yes for `qlearn` and `greedy_q` means. Random does not move. |
+| State coverage collapses for every learned agent | No. `qlearn` coverage rises. `greedy_q` collapse to 3 states is seed 0 only. |
+| Alternative tasks always exceed the step budget | No. Only `greedy_q` seed 0 at noise 0.7 has length 6030. |
+| Random CTRR is flat across noise | Yes, and the level is 0.59, not near zero. |
 
-## 6. Limitations and next steps
+## 6. Limits
 
-- **Single environment.** Next: Procgen / MiniGrid with deep agents.
-- **Three tasks.** Next: 8–16 tasks with hierarchical rewards.
-- **No "anti-gravity" baseline.** Next: ablation with a "no-attractor"
-  environment (uniform rewards) to confirm CTRR → 0.
-- **No policy-distance curve.** Next: plot CTRR vs. KL(task_emb ||
-  policy), the natural continuous Task-Gravity operator.
+One 7×7 grid, three tasks, three seeds, 400 episodes. No anti-gravity (uniform reward) control. The deep PPO table is a different env and is not a confirmation of this one; see `FAILURE_MODES.md`.

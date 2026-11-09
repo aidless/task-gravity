@@ -1,3 +1,5 @@
+# Tabular offline path. This workflow does not train PPO and does not install
+# the deep-agent stack. That path lives in ppo.yml (workflow_dispatch only).
 name: checks
 on: [push, pull_request]
 permissions:
@@ -15,4 +17,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
       # The suite imports src/, which imports numpy (declared in requirements.txt).
       - run: python -m pip install -r requirements.txt pytest
-      - run: python -m pytest tests -q
+      - name: Tabular tests and drift check (no PPO)
+        run: python -m pytest tests -q

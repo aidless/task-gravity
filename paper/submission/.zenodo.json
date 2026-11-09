@@ -1,9 +1,7 @@
 {
   "title": "Task Gravity — Reference Implementation",
-  "description": "Reference implementation accompanying the position paper 'Task Gravity: Policy Attractors and Cross-Task Compulsivity in Reinforcement Learning Agents'. Includes the tabular baseline (NumPy) and a Stable-Baselines3 PPO reproduction. All empirical results in the paper are reproducible in < 5 minutes on a CPU laptop.",
-  "upload_type": "publication",
-  "publication_type": "preprint",
-  "publication_date": "2026-07-22",
+  "description": "Draft metadata for the task-gravity repository. This file has not been uploaded anywhere. Zenodo and ChinaXiv DOIs are not minted. The offline evidence is the tabular sweep; the PPO table is not reproduced by default CI.",
+  "upload_type": "software",
   "creators": [
     {
       "name": "Task Gravity Authors",
@@ -26,12 +24,5 @@
   "communities": [
     { "identifier": "reinforcement-learning" },
     { "identifier": "ai-safety" }
-  ],
-  "related_identifiers": [
-    {
-      "identifier": "__DOI_CHINAXIV__",
-      "relation": "isIdenticalTo",
-      "scheme": "doi"
-    }
   ]
 }

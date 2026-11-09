@@ -132,7 +132,7 @@
 <div class="page">
 
 <div class="meta">
-  <span><b>Status:</b> Workshop-ready position paper</span>
+  <span><b>Status:</b> Workshop draft. Not accepted. Not submitted. DOIs are not minted.</span>
   <span><b>Date:</b> July 2026</span>
   <span><b>Companion:</b> <code>paper/theory/task_gravity_theory.tex</code></span>
 </div>
@@ -220,25 +220,26 @@
 <h3>4.2 CTRR — Cross-Task Return Rate</h3>
 <pre>CTRR = #{ task-switch events where old-task policy is replayed } / #{ total task switches }</pre>
 <p>This is the metric that captures the user's original intuition: <b>the agent "comes back" to a task that is no longer active</b>.</p>
+<p>The code's CTRR is the fraction of non-attractor segments that visit the attractor goal cell, which is not the task-switch formula in §4.2. Procgen, Crafter, SAC, and RecurrentPPO were not run (UNKNOWN).</p>
 
 <h3>4.3 Empirical results (tabular baseline)</h3>
 <div class="figure">
   <img src="../../experiment/results/ctrr_vs_noise.png" alt="CTRR vs noise">
-  <div class="caption">Figure 1 (tabular). CTRR climbs sharply for learned agents as the task embedding becomes unreliable; random stays flat. Tabular Q at noise = 0.7 sees CTRR ≈ 1.0.</div>
+  <div class="caption">Figure 1 (tabular). Means from the committed JSON: random CTRR stays 0.59; qlearn 0.01 / 0.98 / 0.86; greedy_q 0.00 / 0.90 / 1.00. The qlearn noise-0.7 seeds include 0.6.</div>
 </div>
 <div class="figure">
   <img src="../../experiment/results/unique_states_vs_noise.png" alt="unique states vs noise">
-  <div class="caption">Figure 2 (tabular). The greedy Q-learning agent's distinct-state coverage collapses from 7 to 3 cells under high noise — Task Gravity signature: the agent simply stops visiting anywhere else.</div>
+  <div class="caption">Figure 2 (tabular). Plotted points are means. greedy_q unique states at noise 0.7 are seeds 3, 9, and 7 (mean 6.3), not a collapse from 7 to 3.</div>
 </div>
 
 <h3>4.4 Empirical results (deep PPO agent)</h3>
 <div class="figure">
   <img src="../../experiment/deep/results/deep_ctrr.png" alt="deep CTRR">
-  <div class="caption">Figure 3 (PPO). CTRR jumps monotonically with training-time noise. An agent trained under noise=0.7 cannot unlearn its attractor even when evaluated under clean conditions.</div>
+  <div class="caption">Figure 3 (PPO). Cell means at eval noise 0.7 are 0.23, 0.34, 0.42. train_noise 0.7 / eval_noise 0.0 CTRR seeds are 0.5, 0.5, 0.0. Training budget is UNKNOWN. Per-seed ranges overlap.</div>
 </div>
 <div class="figure">
   <img src="../../experiment/deep/results/deep_trajlen.png" alt="deep trajectory length">
-  <div class="caption">Figure 4 (PPO). Locked agents blow past the 32-step budget when forced onto non-attractor tasks — they are heading toward the wrong cell.</div>
+  <div class="caption">Figure 4 (PPO). trajectory_length is the attractor-task eval, not the non-attractor segments. 660 means every episode hit the 32-step cap. The same cap appears for train_noise 0.0 seed 2.</div>
 </div>
 
 <h2>5. Cross-disciplinary mapping</h2>
@@ -267,7 +268,7 @@
 <thead><tr><th>Item</th><th>Effort</th><th>Output</th></tr></thead>
 <tbody>
 <tr><td>Reference implementation of TRR / CTRR</td><td>1 week</td><td>open-source lib</td></tr>
-<tr><td>Procgen / MiniGrid benchmark</td><td>2 weeks</td><td>first measurement table <span class="pill">DONE (deep/)</span></td></tr>
+<tr><td>Procgen / MiniGrid benchmark</td><td>2 weeks</td><td>not run (UNKNOWN). deep/ is a short custom grid, not Procgen.</td></tr>
 <tr><td>Cross-task training corpus</td><td>1 month</td><td>CTRR curves vs. task similarity</td></tr>
 <tr><td>Human-compulsion analogy (neuroscience co-author)</td><td>ongoing</td><td>joint paper</td></tr>
 <tr><td>Long-horizon deployment study</td><td>3 months</td><td>field data</td></tr>

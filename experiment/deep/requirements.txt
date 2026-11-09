@@ -1,4 +1,6 @@
-# Deep PPO reproduction - additional dependencies on top of tabular baseline
+# Deep PPO reproduction - additional dependencies on top of tabular baseline.
+# minigrid is declared below and is not imported by experiment/deep/src.
+# The runner is a custom gymnasium grid, not MiniGrid and not Procgen.
 gymnasium>=1.0
 minigrid>=3.0
 stable-baselines3>=2.0

@@ -1,6 +1,7 @@
 # Cover Letter — Task Gravity
 
-**Submission target:** Workshop on Aligned AI / ICML Workshop on Reinforcement Learning Theory / AGI Safety Workshop (please route to the most relevant track).
+**Status:** Draft letter. Not accepted. Not submitted.
+**Suggested routing (not a venue that has this paper):** a workshop track that takes position papers. See `venues.md`. Nothing in that list is an acceptance.
 
 ---
 
@@ -19,12 +20,12 @@ A phenomenon routinely observed in long-running RL agents — *the agent cannot 
 
 ## Headline empirical result
 
-We provide a reference implementation (NumPy + Stable-Baselines3) and run two experiments:
+Two committed tables, not a single file:
 
-- **Tabular baseline** (3 tasks, biased rewards): CTRR climbs from 0.01 to **1.0** as the task embedding becomes unreliable. The greedy agent visits only **3** distinct states instead of 7.
-- **PPO deep agent** (vector obs, 3 tasks): CTRR monotonically increases with training-time noise; an agent trained under noise = 0.7 cannot route even when evaluated under noise = 0.0. Locked agents blow past the step budget when forced onto non-attractor tasks.
+- **Tabular** (`experiment/results/trr_ctrr_table.json`, seeds 0–2): mean CTRR for `qlearn` is 0.01 / 0.98 / 0.86 and for `greedy_q` is 0.00 / 0.90 / 1.00 at noise 0.0 / 0.3 / 0.7. Random stays at 0.59. agent greedy_q noise 0.7 unique_states seeds: 3, 9, 7. The mean is 6.3. Seed 0 is the short coverage row; seeds 1 and 2 are not.
+- **PPO** (`experiment/deep/results/deep_trr_ctrr_table.json`): cell-mean CTRR at eval noise 0.7 is 0.23, 0.34, 0.42. train_noise 0.7 / eval_noise 0.0 CTRR seeds are 0.5, 0.5, and 0.0. The training budget is UNKNOWN. This run is not in CI.
 
-The empirical signature is reproducible in <30 s on a CPU laptop, and the code is provided as a single-file reference.
+The tabular sweep is rerun by `tests/test_offline.py`. The PPO table is not.
 
 ## What we are not claiming
 

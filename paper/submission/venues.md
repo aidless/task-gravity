@@ -1,5 +1,8 @@
 # 投递目标(Venues)——基于 2026-07-22 实时信息
 
+> STATUS: WORK-IN-PROGRESS. This file is a suggested route, not a record of submission or acceptance.
+> No venue has accepted this draft. DOIs are not minted. The PPO table does not confirm the tabular seeds one-for-one; see `../../FAILURE_MODES.md`.
+
 > **重要背景**:中国自动化学会(CAA)已于 2026 年 3 月正式将 NeurIPS
 > 从推荐会议目录中除名,理由是该会议推行的涉华投稿限制。
 > 因此本表**优先国内会议**,国际会议作为次选并附说明。

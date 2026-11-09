@@ -1,0 +1,223 @@
+{
+  "source": "experiment/results/trr_ctrr_table.json",
+  "std": "population",
+  "png_byte_identity": "UNKNOWN",
+  "points": [
+    {
+      "metric": "CTRR",
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.0
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.9,
+      "pstdev": 0.14142135623730953,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.3
+    },
+    {
+      "metric": "CTRR",
+      "mean": 1.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.7
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.011111111111111112,
+      "pstdev": 0.015713484026367724,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.0
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.9777777777777779,
+      "pstdev": 0.03142696805273544,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.3
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.8555555555555555,
+      "pstdev": 0.18121673811444547,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.7
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.5888888888888889,
+      "pstdev": 0.08748897637790899,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.0
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.5888888888888889,
+      "pstdev": 0.08748897637790899,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.3
+    },
+    {
+      "metric": "CTRR",
+      "mean": 0.5888888888888889,
+      "pstdev": 0.08748897637790899,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.7
+    },
+    {
+      "metric": "unique_states",
+      "mean": 7.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.0
+    },
+    {
+      "metric": "unique_states",
+      "mean": 7.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.3
+    },
+    {
+      "metric": "unique_states",
+      "mean": 6.333333333333333,
+      "pstdev": 2.494438257849294,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.7
+    },
+    {
+      "metric": "unique_states",
+      "mean": 14.333333333333334,
+      "pstdev": 0.9428090415820634,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.0
+    },
+    {
+      "metric": "unique_states",
+      "mean": 21.0,
+      "pstdev": 6.164414002968976,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.3
+    },
+    {
+      "metric": "unique_states",
+      "mean": 20.333333333333332,
+      "pstdev": 4.0276819911981905,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.7
+    },
+    {
+      "metric": "unique_states",
+      "mean": 47.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.0
+    },
+    {
+      "metric": "unique_states",
+      "mean": 47.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.3
+    },
+    {
+      "metric": "unique_states",
+      "mean": 47.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.7
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 210.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.0
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 210.0,
+      "pstdev": 0.0,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.3
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 2170.0,
+      "pstdev": 2729.542086138259,
+      "n": 3,
+      "agent": "greedy_q",
+      "noise": 0.7
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 248.66666666666666,
+      "pstdev": 26.411277052720408,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.0
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 1769.3333333333333,
+      "pstdev": 1102.2559694654515,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.3
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 4204.0,
+      "pstdev": 1380.7222747533262,
+      "n": 3,
+      "agent": "qlearn",
+      "noise": 0.7
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 3376.6666666666665,
+      "pstdev": 98.9185972852875,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.0
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 3376.6666666666665,
+      "pstdev": 98.9185972852875,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.3
+    },
+    {
+      "metric": "trajectory_length",
+      "mean": 3376.6666666666665,
+      "pstdev": 98.9185972852875,
+      "n": 3,
+      "agent": "random",
+      "noise": 0.7
+    }
+  ]
+}

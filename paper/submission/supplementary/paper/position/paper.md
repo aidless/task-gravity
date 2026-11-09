@@ -1,6 +1,6 @@
 # Task Gravity: Policy Attractors and Cross-Task Compulsivity in Reinforcement Learning Agents
 
-**Status:** Position paper draft (workshop-ready)
+**Status:** Workshop draft. Not accepted. Not submitted. Zenodo and ChinaXiv DOIs are not minted.
 **Date:** July 2026
 **Companion theory:** `paper/theory/task_gravity_theory.tex`
 
@@ -116,7 +116,11 @@ CTRR = #{ task-switch events where old-task policy is replayed } / #{ total task
 
 This is the metric that captures the user's original intuition: **the agent "comes back" to a task that is no longer active**.
 
+The code's CTRR is the fraction of non-attractor segments that visit the attractor goal cell, which is not the task-switch formula in §4.2. README numbers are the code, not this formula.
+
 ### 4.3 Experimental design
+
+The list below is a proposal, not a completed study. Procgen, Crafter, SAC, and RecurrentPPO were not run (UNKNOWN). The committed measurements are the 7×7 tabular sweep and the short custom-grid PPO table under `experiment/`.
 
 - **Environments:** MiniGrid (multi-room), Procgen, Crafter.
 - **Algorithms:** PPO, RecurrentPPO, SAC.

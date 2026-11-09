@@ -1,0 +1,18 @@
+# Not triggered by push or by a pull request. Dispatch only.
+# This workflow does not train a PPO agent and does not install torch.
+# The committed deep table's training budget is UNKNOWN and is not reproduced here.
+name: ppo-deep
+
+on:
+  workflow_dispatch:
+
+jobs:
+  compile-deep-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Byte-compile deep sources only
+        run: python -m compileall -q experiment/deep/src
