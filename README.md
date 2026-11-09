@@ -1,4 +1,6 @@
 # Task Gravity — Complete Deliverables
+
+[![CI](https://github.com/aidless/task-gravity/actions/workflows/checks.yml/badge.svg)](https://github.com/aidless/task-gravity/actions/workflows/checks.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  [![Data](https://img.shields.io/badge/data-CC--BY--4.0-lightgrey.svg)](LICENSE)
 
 Three integrated outputs:
