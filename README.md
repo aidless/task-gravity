@@ -1,4 +1,6 @@
 # Task Gravity — Complete Deliverables
+
+[![CI](https://github.com/aidless/task-gravity/actions/workflows/checks.yml/badge.svg)](https://github.com/aidless/task-gravity/actions/workflows/checks.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  [![Data](https://img.shields.io/badge/data-CC--BY--4.0-lightgrey.svg)](LICENSE)
 
 Three integrated outputs:
@@ -95,6 +97,10 @@ README.md                            # ← you are here
 agent collapses onto the attractor task. State coverage drops from
 14 → 3; CTRR climbs from 0.01 → 1.0.
 
+![CTRR vs task-embedding noise (tabular)](experiment/results/ctrr_vs_noise.png)
+![Unique states visited vs noise (tabular)](experiment/results/unique_states_vs_noise.png)
+![Trajectory length vs noise (tabular)](experiment/results/trajectory_length_vs_noise.png)
+
 ### Deep PPO agent (`experiment/deep/results/`)
 
 | train_noise | eval_noise | CTRR | unique_states | trajectory_length |
@@ -110,6 +116,26 @@ even when evaluated under noise = 0.0 — the attractor basin is
 *permanent*. Locked agents blow past the 32-step budget when forced
 onto non-attractor tasks because they are heading toward the wrong
 cell.
+
+![CTRR vs noise (deep PPO)](experiment/deep/results/deep_ctrr.png)
+![Unique states vs noise (deep PPO)](experiment/deep/results/deep_unique.png)
+![Trajectory length vs noise (deep PPO)](experiment/deep/results/deep_trajlen.png)
+
+---
+
+## Limits
+
+- The tabular sweep runs **3 seeds (0–2)** per (agent, noise) cell; the
+  `unique_states = 3` headline value above is the seed-0 value while the
+  committed CSV mean is 6.3 (per-seed 3/9/7) — see the known-discrepancy
+  note under *Data availability*.
+- Deep PPO results come from 10k-timestep PPO runs with cached checkpoints;
+  they reproduce the phenomenon's direction, not a tight effect size.
+- `experiment/deep/` needs `stable-baselines3 torch gymnasium minigrid`;
+  the PDF deliverable requires `pdflatex` (not installed here) — HTML is
+  the recommended format.
+- Findings are demonstrated on MultiTaskGoToObj-style gridworlds; scaling
+  to Procgen / LLM agents is explicitly open (see `open_problems.md`).
 
 ---
 
