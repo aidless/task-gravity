@@ -328,3 +328,28 @@ EOF
 MIT, unless otherwise noted in individual files.
 
 > **Dual license.** Task Gravity releases the experiment results and figures under `experiment/` under
+
+---
+
+## 验收题库与复算
+
+`eval/cases.jsonl` 是 20 条可执行验收题，覆盖八个口径：`env/grid`（网格动力学与墙体碰撞）、
+`env/observation`（one-hot 与均匀噪声两种任务嵌入）、`metrics/trr`（跨 episode 与 episode 内重访率）、
+`metrics/ctrr`（吸引子目标格回流率、candidate 过滤与缺失任务号）、`agents/qlearning`（终止步的
+Bellman 目标、贪心 agent 的 epsilon 覆盖）、`results/tables`（tabular 与 PPO 结果表的现算数字）、
+`tests/smoke`（用 ast 数测试条数）、`docs/交付文档`（本节存在性与理论件的定义环境）。其中 18 条是
+`expr` / `raises`，真调 `experiment/src` 下的 API 或真解析仓内 CSV/JSON/源码，期望值一律现算而非抄文档。
+
+```bash
+python3 eval/run_cases.py            # 20/20 cases passed
+python3 eval/run_cases.py --save     # 顺带把结果写进 eval/run-report.json
+python3 eval/run_cases.py --selftest # 篡改一条期望值，必须变红（19/20）
+```
+
+**数字如何复算**：`eval/run-report.json` 里每条 case 都带 `id` / `axis` / `detail`，把 `detail` 与
+`cases.jsonl` 的 `verify` 代码一起看，就能从源码复现该数字；`--save` 重跑一次即可重建整份报告，
+不需要手工抄数。表里的均值与 `experiment/results/*.csv`、`experiment/deep/results/*.csv` 同源，
+`TB-01` / `TB-03` 直接读 CSV 现算（例如 `qlearn` 在 `noise=0.0` 下的 CTRR 均值），改一行数据就会变红。
+
+**失败归因**：`run_cases.py` 不只报通过率，失败时按 `axis` 汇总（例如
+`metrics/ctrr: 1 条 —— CT-02`），直接指出是哪个模块的哪个口径坏了。

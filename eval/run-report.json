@@ -1,0 +1,129 @@
+{
+ "total": 20,
+ "passed": 20,
+ "failed": 0,
+ "selftest": false,
+ "failed_by_axis": {},
+ "results": [
+  {
+   "id": "EV-01",
+   "axis": "env/grid",
+   "ok": true,
+   "detail": "1.0"
+  },
+  {
+   "id": "EV-02",
+   "axis": "env/grid",
+   "ok": true,
+   "detail": "(3, 2)"
+  },
+  {
+   "id": "EV-03",
+   "axis": "env/grid",
+   "ok": true,
+   "detail": "raised KeyError"
+  },
+  {
+   "id": "OB-01",
+   "axis": "env/observation",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "id": "OB-02",
+   "axis": "env/observation",
+   "ok": true,
+   "detail": "0"
+  },
+  {
+   "id": "TR-01",
+   "axis": "metrics/trr",
+   "ok": true,
+   "detail": "0.5"
+  },
+  {
+   "id": "TR-02",
+   "axis": "metrics/trr",
+   "ok": true,
+   "detail": "0.3333333333333333"
+  },
+  {
+   "id": "TR-03",
+   "axis": "metrics/trr",
+   "ok": true,
+   "detail": "0.0"
+  },
+  {
+   "id": "CT-01",
+   "axis": "metrics/ctrr",
+   "ok": true,
+   "detail": "0.5"
+  },
+  {
+   "id": "CT-02",
+   "axis": "metrics/ctrr",
+   "ok": true,
+   "detail": "1.0"
+  },
+  {
+   "id": "CT-03",
+   "axis": "metrics/ctrr",
+   "ok": true,
+   "detail": "raised KeyError"
+  },
+  {
+   "id": "AG-01",
+   "axis": "agents/qlearning",
+   "ok": true,
+   "detail": "0.5"
+  },
+  {
+   "id": "AG-02",
+   "axis": "agents/qlearning",
+   "ok": true,
+   "detail": "0.0"
+  },
+  {
+   "id": "AG-03",
+   "axis": "agents/qlearning",
+   "ok": true,
+   "detail": "raised ValueError"
+  },
+  {
+   "id": "TB-01",
+   "axis": "results/tables",
+   "ok": true,
+   "detail": "0.011111111111111112"
+  },
+  {
+   "id": "TB-02",
+   "axis": "results/tables",
+   "ok": true,
+   "detail": "27"
+  },
+  {
+   "id": "TB-03",
+   "axis": "results/tables",
+   "ok": true,
+   "detail": "0.3333333333333333"
+  },
+  {
+   "id": "TS-01",
+   "axis": "tests/smoke",
+   "ok": true,
+   "detail": "4"
+  },
+  {
+   "id": "DC-01",
+   "axis": "docs/交付文档",
+   "ok": true,
+   "detail": "## 验收题库与复算"
+  },
+  {
+   "id": "DC-02",
+   "axis": "docs/交付文档",
+   "ok": true,
+   "detail": "\\begin{definition}[Task Gravity Point]"
+  }
+ ]
+}
