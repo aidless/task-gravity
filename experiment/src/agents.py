@@ -19,7 +19,7 @@ import numpy as np
 from collections import defaultdict
 from typing import Dict, Tuple, Any
 
-from .env import state_key, ACTIONS
+from .env import state_key
 
 
 # ----------------------------------------------------------------------

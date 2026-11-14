@@ -28,7 +28,7 @@ Task Gravity from mere wall-bouncing is:
 from __future__ import annotations
 
 import numpy as np
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple
 
 from .env import state_key, MultiTaskGrid
 

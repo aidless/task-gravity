@@ -14,7 +14,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from src.env import MultiTaskGoToObj, TASK_GOAL_POS, ATTRACTOR_TASK_ID  # noqa: E402
+from src.env import MultiTaskGoToObj, ATTRACTOR_TASK_ID  # noqa: E402
 
 
 # ----------------------------------------------------------------------

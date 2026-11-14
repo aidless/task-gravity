@@ -15,7 +15,7 @@ import numpy as np
 import gymnasium as gym
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import BaseCallback
-from stable_baselines3.common.vec_env import DummyVecEnv, VecEnv
+from stable_baselines3.common.vec_env import DummyVecEnv
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
